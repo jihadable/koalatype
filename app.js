@@ -205,6 +205,10 @@ document.addEventListener("keydown", (e) => {
         // add extra
         if (j == 0 && i != 0 && line.offsetLeft != letter.parentElement.offsetLeft){
 
+            if (letter.parentElement.previousElementSibling.childNodes.length >= 15){
+                return
+            }
+
             if (i >= length){
                 let letterParentElement = letter.parentElement
 
@@ -216,7 +220,10 @@ document.addEventListener("keydown", (e) => {
                 letter = letter.parentElement.previousElementSibling.lastElementChild
             }
 
-            updateLinePosition(letter.offsetLeft + letter.parentElement.offsetLeft + letter.offsetWidth, letter.parentElement.offsetTop)            
+            updateLinePosition(letter.offsetLeft + letter.parentElement.offsetLeft + letter.offsetWidth, letter.parentElement.offsetTop)
+
+            // update counter
+            counter.innerText = `${checkWords()}/${length}`
 
             return
         }
@@ -277,6 +284,9 @@ document.addEventListener("keydown", (e) => {
 
             if (line.offsetLeft == letter.parentElement.offsetLeft){
                 updateLinePosition(letter.parentElement.previousElementSibling.offsetLeft + letter.parentElement.previousElementSibling.offsetWidth, letter.parentElement.previousElementSibling.offsetTop)
+
+                // update counter
+                counter.innerText = `${checkWords()}/${length}`
                 
                 return
             } 
@@ -384,7 +394,7 @@ function finish(){
     let min = parseInt(time.innerText.split(":")[0])
     let sec = parseInt(time.innerText.split(":")[1]) + min * 60
 
-    scoreWrap.querySelector(".score").innerText = `${Math.ceil(length / sec)} words/sec`
+    scoreWrap.querySelector(".score").innerText = `${Math.round(length / sec)} words/sec`
 
     isFinish = true
 }

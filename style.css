@@ -6,7 +6,6 @@
 }
 
 body{
-    max-height: 100vh;
     background-color: #03191d;
     display: flex;
     flex-direction: column;
@@ -158,7 +157,7 @@ body{
     align-items: center;
     width: 90vw;
     justify-content: space-around;
-    margin-top: 1rem;
+    margin: 1rem 0;
     
     .timer,.counter{
         padding: .3rem .6rem;
