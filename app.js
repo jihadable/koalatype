@@ -169,6 +169,10 @@ function resetTimer(){
 
 // typing
 document.addEventListener("keydown", (e) => {
+    if (isFinish){
+        return
+    }
+
     let key = e.key
     
     let alphabet = [
@@ -187,7 +191,7 @@ document.addEventListener("keydown", (e) => {
         letter = word[j]
     }
 
-    if (alphabet.includes(key) && !isFinish){
+    if (alphabet.includes(key)){
 
         if (!timeIsRunning){
             timer()
@@ -394,7 +398,7 @@ function finish(){
     let min = parseInt(time.innerText.split(":")[0])
     let sec = parseInt(time.innerText.split(":")[1]) + min * 60
 
-    scoreWrap.querySelector(".score").innerText = `${Math.round(length / sec)} words/sec`
+    scoreWrap.querySelector(".score").innerText = `${(length / sec).toFixed(2)} words/sec`
 
     isFinish = true
 }

@@ -73,7 +73,7 @@ body{
         top: 1rem;
         left: 1rem;
         z-index: 1;
-        transition: all .2s;
+        transition: all .1s;
     }
 
     .words-wrapper{
@@ -89,12 +89,12 @@ body{
         & word{
             display: inline-flex;
             position: relative;
-            transition: all .2s;
+            transition: all .1s;
             
             & letter{
                 position: relative;
                 font-size: 1.5rem;
-                transition: all .2s;
+                transition: all .1s;
                 color: rgb(255,255,255,.4);
             }
     
@@ -124,7 +124,6 @@ body{
         border-bottom: 2px solid rgb(0, 255, 0);
         color: #aaa;
         border-radius: .5rem;
-        transition: all .2s;
         transform-origin: bottom;
     
         &.active{
