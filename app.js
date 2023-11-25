@@ -2,7 +2,7 @@ var out = console.log.bind(document)
 
 // input the random words
 // import { words2, words3, words4, words5, words6, punctuations } from "./words.js"
-import { wordList, punctuations } from "./chars.js"
+import { wordListEN, wordListID, punctuations } from "./chars.js"
 
 const wordsWrapper = document.querySelector(".words-wrapper")
 const lengthElement = document.querySelector(".length")
@@ -18,6 +18,8 @@ let i = 0
 let j = 0
 
 let length = 50
+
+let lang = "English"
 let punctuation = false
 let numbers = false
 
@@ -38,6 +40,8 @@ function generateWords(){
 
     const wordsData = []
 
+    document.querySelector(".lang div").innerText = lang
+
     lengthElement.querySelectorAll("div").forEach(child => {
         child.classList.remove("active")
     })
@@ -57,7 +61,12 @@ function generateWords(){
         let newWords
 
         if (random <= 3){
-            newWords = [...wordList]
+            if (lang == "English"){
+                newWords = [...wordListEN]
+            }
+            else if (lang == "Indonesian"){
+                newWords = [...wordListID]
+            }
         }
         else{
             random = `${Math.floor(Math.random() * 10000)}`
@@ -126,8 +135,23 @@ lengthElement.querySelectorAll("div").forEach(child => {
     })
 })
 
+// toggle punctuation, numbers, and lenguage
+const langBtn = document.querySelector(".lang")
 const punctuationBtn = document.querySelector(".punctuation")
 const numbersBtn = document.querySelector(".numbers")
+
+langBtn.addEventListener("click", () => {
+    resetTimer()
+    
+    if (lang == "English"){
+        lang = "Indonesian"
+    }
+    else if (lang == "Indonesian"){
+        lang = "English"
+    }
+
+    generateWords()
+})
 
 punctuationBtn.addEventListener("click", () => {
     resetTimer()
