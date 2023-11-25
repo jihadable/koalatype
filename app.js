@@ -1,7 +1,8 @@
 var out = console.log.bind(document)
 
 // input the random words
-import { words2, words3, words4, words5, words6, punctuations } from "./words.js"
+// import { words2, words3, words4, words5, words6, punctuations } from "./words.js"
+import { wordList, punctuations } from "./chars.js"
 
 const wordsWrapper = document.querySelector(".words-wrapper")
 const lengthElement = document.querySelector(".length")
@@ -47,30 +48,18 @@ function generateWords(){
         let random
 
         if (numbers){
-            random = Math.floor(Math.random() * 6) + 2
+            random = Math.floor(Math.random() * 4) + 1
         }
         else {
-            random = Math.floor(Math.random() * 5) + 2
+            random = 1
         }
 
         let newWords
 
-        if (random == 2){
-            newWords = [...words2]
+        if (random <= 3){
+            newWords = [...wordList]
         }
-        else if (random == 3){
-            newWords = [...words3]
-        }
-        else if (random == 4){
-            newWords = [...words4]
-        }
-        else if (random == 5){
-            newWords = [...words5]
-        }
-        else if (random == 6){
-            newWords = [...words6]
-        }
-        else if (random == 7){
+        else{
             random = `${Math.floor(Math.random() * 10000)}`
 
             wordsData.push([...random.split("")])
