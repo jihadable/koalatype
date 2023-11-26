@@ -1,7 +1,6 @@
-var out = console.log.bind(document)
+const out = console.log.bind(document)
 
 // input the random words
-// import { words2, words3, words4, words5, words6, punctuations } from "./words.js"
 import { wordListEN, wordListID, punctuations } from "./chars.js"
 
 const wordsWrapper = document.querySelector(".words-wrapper")
@@ -17,19 +16,48 @@ const line = document.querySelector(".line")
 let i = 0
 let j = 0
 
-let length = 50
+function setLocalStorage(){
+    if (!localStorage.getItem("length")){
+        localStorage.setItem("length", JSON.stringify(50))
+    }
 
-let lang = "English"
-let punctuation = false
-let numbers = false
+    if (!localStorage.getItem("lang")){
+        localStorage.setItem("lang", "English")
+    }
+
+    if (!localStorage.getItem("punctuation")){
+        localStorage.setItem("punctuation", JSON.stringify(false))
+    }
+
+    if (!localStorage.getItem("numbers")){
+        localStorage.setItem("numbers", JSON.stringify(false))
+    }
+}
+
+setLocalStorage()
+
+let length = JSON.parse(localStorage.getItem("length"))
+let lang = localStorage.getItem("lang")
+let punctuation = JSON.parse(localStorage.getItem("punctuation"))
+let numbers = JSON.parse(localStorage.getItem("numbers"))
 
 let isFinish = false
 
 function generateWords(){
+
+    localStorage.setItem("length", JSON.stringify(length))
+    localStorage.setItem("lang", lang)
+    localStorage.setItem("punctuation", JSON.stringify(punctuation))
+    localStorage.setItem("numbers", JSON.stringify(numbers))
+
+    document.querySelector(".punctuation").classList.toggle("active", punctuation)
+    document.querySelector(".numbers").classList.toggle("active", numbers)
+
     i = 0
     j = 0
 
     isFinish = false
+
     document.querySelector(".score-wrap").classList.remove("active")
     wordsWrapper.style.display = "flex"
     line.style.display = "block"
@@ -155,14 +183,12 @@ langBtn.addEventListener("click", () => {
 
 punctuationBtn.addEventListener("click", () => {
     resetTimer()
-    punctuationBtn.classList.toggle("active")
     punctuation = !punctuation
     generateWords()
 })
 
 numbersBtn.addEventListener("click", () => {
     resetTimer()
-    numbersBtn.classList.toggle("active")
     numbers = !numbers
     generateWords()
 })
